@@ -29,3 +29,6 @@ go mod download && go build -o ./main ./cmd/main/main.go && ./main
 ```
 sh .ops/deploy.sh
 ```
+
+
+![alt text](https://github.com/EugeneNail/go-test-task/blob/main/2024-06-11_12-18.png?raw=true)
