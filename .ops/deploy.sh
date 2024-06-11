@@ -1,0 +1,1 @@
+go mod download && go build -o ./main ./cmd/main/main.go && ./main
