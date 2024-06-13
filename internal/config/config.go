@@ -14,12 +14,12 @@ type Config struct {
 	MaxWorkers int      `yaml:"max_workers"`
 }
 
-func Load() (Config, error) {
+func Load() (Config, error) { // лучше путь передавать сюда параметром - это будет более расширяемое
 	var config Config
 
-	directory, err := getProjectDirectory()
+	directory, err := getProjectDirectory() // можно конечно, но сложнаааа.
 	if err != nil {
-		return config, fmt.Errorf("config.Load: %w", err)
+		return config, fmt.Errorf("config.Load: %w", err) // лучше errors.Wrap - так окнечно можно, но обычно я везде видел  явный Wrap
 	}
 
 	file, err := os.ReadFile(filepath.Join(directory, "config.yaml"))

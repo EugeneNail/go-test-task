@@ -39,10 +39,11 @@ func getWorkers(config config.Config) []*workers.Worker {
 	return activeWorkers
 }
 
+// не расширяемо - ты кидаешь сюда прям конфигу, зачем функции знать о конфиге - она должна разбивать сиволы на N групп (я бы явно передал сюда эти параметры) - если тебе придется бить еще какие-то символы или будешь копипастить эту фукнцию чтобы передать жддругую конфигу или будешь рафакторить эту функцию
 func splitSymbols(config config.Config) [][]string {
 	groups := make([][]string, config.MaxWorkers)
 	for i, symbol := range config.Symbols {
-		groupOffset := i % config.MaxWorkers
+		groupOffset := i % config.MaxWorkers // зщапаникует если MaxWorkers=0
 		groups[groupOffset] = append(groups[groupOffset], symbol)
 	}
 
@@ -62,7 +63,7 @@ func runWorkers(workers []*workers.Worker, wg *sync.WaitGroup, stopChan chan str
 
 func runLogging(messageChan <-chan string) {
 	for {
-		fmt.Println(<-messageChan)
+		fmt.Println(<-messageChan) // лучше через range - если канал закроется, не будешь бесконечно сыпать пустые сообщения
 	}
 }
 
